@@ -61,6 +61,18 @@ export const Text = styled.div`
         margin: 0;
     }
 
+    /* .watchlist{
+        cursor: pointer;
+        background: #348feb;
+        width: 50px;
+        height: 50px;
+        border-radius: 20px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    } */
+
     .director{
         margin: 0 0 0 40px;
         p {
@@ -71,6 +83,18 @@ export const Text = styled.div`
                 font-size: var(--fontBig);
             }
         }
+    }
+
+    button{
+        background: #fc6d26;
+        color: #fff;
+        border: none;
+        height: 50px;
+        width: auto;
+        padding: 25px 60px 25px 60px;
+        text-align: center;
+        line-height: 0px;
+        cursor: pointer;
     }
 
 `;

@@ -18,3 +18,8 @@ export const isPersistedState = stateName =>{
   const sessionState = sessionStorage.getItem(stateName);
   return sessionState && JSON.parse(sessionState);
 }
+
+export const isPersistedStateLocal = stateName =>{
+  const localState = localStorage.getItem(stateName);
+  return localState && JSON.parse(localState);
+}

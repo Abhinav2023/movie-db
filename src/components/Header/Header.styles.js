@@ -19,7 +19,12 @@ export const Content= styled.div`
         text-decoration:none ;
     }
 `
+export const Card = styled.div`
+    display: flex;
+    gap: 20px;
+    align-items: center;
 
+`
 
 export const LogoImg= styled.img`
     width: 200px;

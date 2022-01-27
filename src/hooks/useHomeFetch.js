@@ -1,11 +1,24 @@
 import React, {useState, useEffect, useRef} from "react";
-import API from '../API';
 import { isPersistedState } from "../helpers";
+import { SEARCH_BASE_URL,POPULAR_BASE_URL} from "../config";
 const initialState = {
     page: 0,
     results: [],
     total_pages: 0,
     total_results: 0
+}
+
+const handlefetchMovies= async(searchTerm,page)=> {
+    if(searchTerm){
+        const response = await fetch(`${SEARCH_BASE_URL}${searchTerm}&page=${page}`);
+        const json = await response.json();
+        return json;
+    }else{
+        const response = await fetch(`${POPULAR_BASE_URL}$page=${page}`);
+        const json = await response.json();
+        return json;
+        
+    }
 }
 
 export const useHomeFetch = () =>{
@@ -19,8 +32,7 @@ export const useHomeFetch = () =>{
         try{
             setError(false);
             setLoading(true);
-            const movies = await API.fetchMovies(searchTerm, page);
-
+            const movies = await handlefetchMovies(searchTerm, page);
             setState(prev => ({
                 ...movies,
                 results:
