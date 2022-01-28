@@ -1,17 +1,15 @@
-import React, { useContext } from "react";
-import { Wrapper,Content } from "./WatchList.styles";
-import {Context} from '../../context';
+import React from "react";
 import Thumb from "../Thumb";
 import WatchListMovie from "../WatchListMovie";
-
+import { useSelector } from "react-redux";
 
 import useMovieWatchListFetch from "../../hooks/useMovieWatchListFetch";
 const WatchList = () => {
-    const [user] = useContext(Context);
     const movieWatchList = useMovieWatchListFetch();
+    const user = useSelector((state) => state.auth);
     return (
         <>
-            {!user ?
+            {user.username==='' ?
                 <div>WatchList</div>
                 : 
                 <div>

@@ -1,16 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import RMDBLogo from '../../images/react-movie-logo.svg'
 
 import TMDBLogo from '../../images/tmdb_logo.svg';
 
 import { Wrapper,Content,LogoImg,TMDBLogoImg,Card } from "./Header.styles";
-import { Context } from "../../context";
-import WatchList from "../WatchList";
 import Logout from "../Logout";
+import { useSelector } from "react-redux";
 const Header =()=>{
-
-    const [user] = useContext(Context);
+    const user = useSelector((state) => state.auth);
     return (
         <Wrapper>
             <Content>
@@ -18,13 +16,13 @@ const Header =()=>{
                     <Link to="/">
                         <LogoImg src={RMDBLogo} alt="rmdb-logo" />
                     </Link>
-                    {   user && <Link to="/watchlist">
+                    {   user.username!=='' && <Link to="/watchlist">
                                     <span>Watchlist</span>
                                 </Link>
                     }
                 </Card>
                 <Card>
-                    { user ? (
+                    { user.username!=='' ? (
                         <div>
                             <Logout />
                         </div>

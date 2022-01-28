@@ -1,26 +1,16 @@
-export const loginUser = ({username, password}) => {
+export const login = (loginDetails) => {
     return (dispatch) => {
         dispatch({
             type: "login",
-            username,
-            password
+            payload: loginDetails
         })
     }
-}
+}   
 
-export const logoutUser = () => {
+export const logout = () => {
     return (dispatch) => {
         dispatch({
             type: "logout"
-        })
-    }
-}
-
-export const loginFromLocalUser = ({sessionId}) => {
-    return (dispatch) => {
-        dispatch({
-            type: "loginFromLocal",
-            sessionId
         })
     }
 }

@@ -1,6 +1,5 @@
-import React,{useState, useEffect, useContext} from "react";
+import React,{useState, useEffect} from "react";
 import { Route,Routes } from "react-router-dom";
-import { Context } from './context';
 import { isPersistedStateLocal } from './helpers';
 import { API_KEY,API_URL } from './config';
 import Header from './components/Header';
@@ -10,7 +9,9 @@ import Movie from './components/Movie';
 import NotFound from './components/NotFound';
 import Login from './components/Login';
 import WatchList from "./components/WatchList";
-
+import { useSelector,useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import {actions} from './state/index';
 
 const handleAccountLogin = async (sessionId) => {
     const response = await fetch(`${API_URL}account?api_key=${API_KEY}&session_id=${sessionId}`);
@@ -20,9 +21,11 @@ const handleAccountLogin = async (sessionId) => {
 
 const Authentication = () => {
     const [isLoggingIn, setIsLoggingIn] = useState(false);
-    const [_user,setUser] = useContext(Context);
+    const user = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const {login} = bindActionCreators(actions,dispatch);
     useEffect(async() => {
-        if(_user){
+        if(user.username!==''){
             setIsLoggingIn(false);
             return ;
         }
@@ -31,7 +34,7 @@ const Authentication = () => {
             const localState = isPersistedStateLocal("movie-db");
             if(localState){
                 const sessionId =await handleAccountLogin(localState.sessionId);
-                setUser(localState);
+                login(localState);
             }
             setIsLoggingIn(false);
         }catch(error){

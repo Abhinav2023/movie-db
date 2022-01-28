@@ -1,4 +1,4 @@
-import React,{useContext, useEffect, useState} from "react";
+import React,{useEffect, useState} from "react";
 import PropTypes from 'prop-types'
 import Thumb from "../Thumb";
 import Rate from "../Rate";
@@ -8,9 +8,8 @@ import Spinner from '../Spinner';
 import NoImage from '../../images/no_image.jpg';
 import { FaBookmark, FaRegBookmark,FaCheckCircle} from 'react-icons/fa';
 import { Wrapper,Content,Text } from "./MovieInfo.styles";
-import { Context } from "../../context";
 import useMovieWatchListFetch from "../../hooks/useMovieWatchListFetch";
-
+import {useSelector } from "react-redux";
 const handleRateMovie = async (sessionId, movieId,value) => {
     const requestOptions = {
         method: 'POST',
@@ -43,7 +42,7 @@ const handleAddToWatchList = async(username,sessionId, mediaType, mediaId, watch
 
 
 const MovieInfo = ({movie}) => {
-    const [user] = useContext(Context);
+    const user = useSelector((state) => state.auth);
     const movies = useMovieWatchListFetch();
     const [isAdddingWatchList, setIsAddingWatchList]= useState(false);
     const [isAddedInWatchList, setIsAddedInWatchList]= useState(false);
@@ -92,7 +91,7 @@ const MovieInfo = ({movie}) => {
                             ))}
                         </div>
                     </div>
-                    {user && (
+                    {user.username!=='' && (
                         
                         <div>
                             <div>
