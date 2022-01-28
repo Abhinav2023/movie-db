@@ -62,7 +62,6 @@ const Login = () => {
                 password
             );
             login({username: username, sessionId: sessionId.session_id});
-            navigate('/');
 
         }catch(error){
             setError(true);
@@ -76,7 +75,11 @@ const Login = () => {
         if(name==='password') setPassword(value);
     }
     useEffect(() => {
-        localStorage.setItem("movie-db", JSON.stringify(user));
+        if(user.username!==''){
+            localStorage.setItem("movie-db", JSON.stringify(user));
+            navigate('/');
+        }
+        
     },[user]);
     return (
         <Wrapper>
