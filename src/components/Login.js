@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from "react";
+import React, {useState,  useEffect} from "react";
 
 import  {useNavigate} from 'react-router-dom';
 
@@ -6,12 +6,11 @@ import Button from './Button';
 
 import { Wrapper } from "./Login.styles";
 
-import { Context } from "../context";
 import { LOGIN_URL, REQUEST_TOKEN_URL,SESSION_ID_URL} from "../config";
 
 import { useSelector, useDispatch} from "react-redux";
 import { bindActionCreators} from "redux";
-
+import {actions} from '../state/index';
 const handleGetRequestToken = async () => {
     const response = await fetch(REQUEST_TOKEN_URL);
     const json = await response.json();
@@ -49,8 +48,9 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password,setPassword] = useState('');
     const [error, setError] = useState(false);
-
-    const [_user, setUser] =useContext(Context);
+    const user = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const {login} = bindActionCreators(actions, dispatch)
     const navigate = useNavigate();
     const handleSubmit = async () => {
         setError(false);
@@ -61,8 +61,7 @@ const Login = () => {
                 username,
                 password
             );
-            setUser({ sessionId: sessionId.session_id, username});
-
+            login({username: username, sessionId: sessionId.session_id});
             navigate('/');
 
         }catch(error){
@@ -77,8 +76,8 @@ const Login = () => {
         if(name==='password') setPassword(value);
     }
     useEffect(() => {
-        localStorage.setItem("movie-db", JSON.stringify(_user));
-    },[_user]);
+        localStorage.setItem("movie-db", JSON.stringify(user));
+    },[user]);
     return (
         <Wrapper>
             {error && <div className="error">There was an error.</div>}

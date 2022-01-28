@@ -1,8 +1,8 @@
-import { bool } from "prop-types";
-import React, { useContext, useEffect, useState } from "react";
+
+import {useEffect, useState } from "react";
 import { API_KEY, API_URL } from "../config";
-import { Context } from "../context";
 import {isPersistedStateLocal} from '../helpers';
+import { useSelector } from "react-redux";
 const handleMovieWatchList = async(username,sessionId) => {
     const response = await fetch(`${API_URL}account/${username}/watchlist/movies?api_key=${API_KEY}&language=en-US&sort_by=created_at.asc&session_id=${sessionId}&page=1`);
     const json = await response.json();
@@ -11,7 +11,7 @@ const handleMovieWatchList = async(username,sessionId) => {
 
 const useMovieWatchListFetch = () => {
     const [movieWatchList, setMovieWatchList]= useState([]);
-    const [user] = useContext(Context);
+    const user = useSelector((state) => state.auth);
     const fetchMovieWatchList = async () => {
         try{
             const movies = await handleMovieWatchList(user.username, user.sessionId);

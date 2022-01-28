@@ -1,14 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Content } from "../WatchListMovieInfo/WatchListMovieInfo.styles";
 import { Wrapper,Text } from "../WatchListMovieInfo/WatchListMovieInfo.styles";
 import {isPersistedStateLocal } from '../../helpers';
-import {Context} from '../../context';
 import {FaBookmark, FaCheckCircle, FaRegCheckCircle, FaBan} from 'react-icons/fa';
-import { API_KEY } from "../../config";
-
 const WatchListMovieInfo = ({movie, watched}) => {
     const [isWatched, setIsWatched] = useState(watched);
-    const [user, setUser] = useContext(Context);
     const handleMovieWatched = () => {
         let localStorageWatchedMovies = isPersistedStateLocal("movie-db-watched");
         if(localStorageWatchedMovies){
