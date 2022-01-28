@@ -75,6 +75,7 @@ const Login = () => {
         if(name==='password') setPassword(value);
     }
     useEffect(() => {
+        console.log(user)
         if(user.username!==''){
             localStorage.setItem("movie-db", JSON.stringify(user));
             navigate('/');
