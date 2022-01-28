@@ -6,11 +6,12 @@ const initialState = {
 const authReducer = (state=initialState, action) => {
     switch (action.type) {
         case "login":
-            return state;
+            return state = {
+                username: action.payload.username,
+                sessionId: action.payload.sessionId
+            }
         case "logout":
-            return state;
-        case "loginFromLocal":
-            return state;
+            return state=initialState;
         default:
             return state;
     }

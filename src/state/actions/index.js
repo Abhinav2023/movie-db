@@ -5,7 +5,7 @@ export const login = (loginDetails) => {
             payload: loginDetails
         })
     }
-}   
+}
 
 export const logout = () => {
     return (dispatch) => {
