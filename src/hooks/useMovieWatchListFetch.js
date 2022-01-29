@@ -13,6 +13,7 @@ const useMovieWatchListFetch = () => {
     const [movieWatchList, setMovieWatchList]= useState([]);
     const user = useSelector((state) => state.auth);
     const fetchMovieWatchList = async () => {
+        if(user.username==='') return;
         try{
             const movies = await handleMovieWatchList(user.username, user.sessionId);
             const watchedMovies = isPersistedStateLocal("movie-db-watched");
