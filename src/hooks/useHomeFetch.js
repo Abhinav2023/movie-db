@@ -14,7 +14,7 @@ const handlefetchMovies= async(searchTerm,page)=> {
         const json = await response.json();
         return json;
     }else{
-        const response = await fetch(`${POPULAR_BASE_URL}$page=${page}`);
+        const response = await fetch(`${POPULAR_BASE_URL}&page=${page}`);
         const json = await response.json();
         return json;
         
@@ -38,7 +38,7 @@ export const useHomeFetch = () =>{
                 results:
                     page > 1 ? [...prev.results, ...movies.results] : [...movies.results]
             }))
-
+            
         }catch(error){
             setError(true);
         }
