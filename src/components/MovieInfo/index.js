@@ -53,6 +53,7 @@ const MovieInfo = ({movie}) => {
         setIsAddingWatchList(true);
         const data = await handleAddToWatchList(user.username,user.sessionId, mediaType,movie.id,true);
         setIsAddingWatchList(false);
+        setIsAddedInWatchList(true);
     }
     useEffect(() => {
         movies.map(currentMovie => {
@@ -62,7 +63,7 @@ const MovieInfo = ({movie}) => {
                 return;
             }
         })
-    })
+    },)
     return (
         <Wrapper backdrop={movie.backdrop_path}>
             <Content>
@@ -101,9 +102,7 @@ const MovieInfo = ({movie}) => {
                                 <div className="watchlist">
                                     { !isAddedInWatchList ?
                                         <FaRegBookmark onClick={() => handleWatchList('movie')} />
-                                        : isAdddingWatchList ?
-                                            <Spinner />
-                                            : <FaBookmark />
+                                        : <FaBookmark />
                                     }
                                 </div>
                             </div>
