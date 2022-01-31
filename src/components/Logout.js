@@ -13,6 +13,7 @@ const Logout = () =>{
         localStorage.removeItem("movie-db");
         logout();
         navigate('/');
+        localStorage.removeItem("movie-db-watched");
     }
     return (
         <div>
