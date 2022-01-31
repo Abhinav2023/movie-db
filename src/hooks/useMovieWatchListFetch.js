@@ -42,7 +42,7 @@ const useMovieWatchListFetch = () => {
 
     useEffect(() => {
         fetchMovieWatchList();
-    })
+    },[user])
     return movieWatchList;
 }
 
